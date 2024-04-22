@@ -20,6 +20,9 @@ class TestTelevision:
     def test_mute(self):
         tv = Television()
         tv.mute()
+        assert tv._Television__muted == False  # Mute should not work when TV is off
+        tv.power()
+        tv.mute()
         assert tv._Television__muted == True
         tv.mute()
         assert tv._Television__muted == False
@@ -30,7 +33,7 @@ class TestTelevision:
         assert tv._Television__channel == 1
         tv._Television__channel = Television.MAX_CHANNEL
         tv.channel_up()  # should reset to MIN_CHANNEL
-        assert tv._Television__channel == 0
+        assert tv._Television__channel == Television.MIN_CHANNEL
 
     def test_channel_down(self):
         tv = Television()
@@ -58,3 +61,5 @@ class TestTelevision:
 
 if __name__ == "__main__":
     pytest.main()
+
+      
